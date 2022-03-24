@@ -1,0 +1,109 @@
+:root {
+  --size-300: 0.707rem;
+  --size-400: 1rem;
+  --size-500: 1.414rem;
+  --size-600: 1.999rem;
+  --radius: var(--size-300);
+}
+
+body {
+  background: #fde68a;
+  font-size: 1.125rem;
+  font-family: Georgia;
+}
+
+.wrapper {
+  width: 90vw;
+  width: clamp(16rem, 90vw, 70rem);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--size-500);
+  padding-right: var(--size-500);
+  position: relative;
+}
+
+header {
+  background: #f9f9f9;
+}
+
+h1,
+h2,
+button {
+  font-family: Arial;
+}
+
+button {
+  border-radius: var(--radius);
+  padding: var(--size-300);
+  cursor: pointer;
+  border: none;
+}
+
+button:active {
+  color: inherit;
+}
+
+.header__button {
+  background: #fde68a;
+  border: 2px solid #fde68a;
+}
+
+.header__button:hover {
+  background: #fef3c7;
+}
+
+.panel__button {
+  background: #fef3c7;
+  border: 2px solid #fef3c7;
+}
+
+.panel__button:hover {
+  background: #fde68a;
+}
+
+.header__layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--size-300);
+  padding-bottom: var(--size-300);
+}
+
+.header__title {
+  font-size: var(--size-500);
+}
+
+.round {
+  text-align: center;
+  padding: var(--size-600) var(--size-500);
+}
+
+.panel {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  display: flex;
+
+  flex-direction: column;
+}
+
+.panel__card {
+  flex: 1 0 auto;
+  background: #fef3c7;
+  margin: 1rem;
+  padding: var(--size-600) var(--size-500);
+  border-radius: var(--radius);
+  text-align: center;
+  line-height: 2;
+}
+
+.panel__card input {
+  max-width: 12ch;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #000;
+  background: #fef3c7;
+
+  margin: 0 1ch;
+  padding: 0 0.5ch;
+}
