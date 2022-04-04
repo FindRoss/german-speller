@@ -116,7 +116,7 @@ button:active {
 }
 
 .panel__card input:focus {
-  color: var(--accent-color);
+  /* color: var(--accent-color); */
   border: var(--accent-color);
 }
 
