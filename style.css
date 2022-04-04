@@ -2,12 +2,15 @@
   --size-300: 0.707rem;
   --size-400: 1rem;
   --size-500: 1.414rem;
-  --size-600: 1.999rem;
+  --size-600: 2rem;
   --radius: var(--size-300);
+  --bg-color: #f0f2f5;
+  --accent-color: #1977f2;
 }
 
 body {
-  background: #fde68a;
+  /* background: #fde68a; */
+  background: var(--bg-color);
   font-size: 1.125rem;
   font-family: Georgia;
 }
@@ -53,24 +56,27 @@ button:active {
 }
 
 .panel__button {
-  background: #fef3c7;
-  border: 2px solid #fef3c7;
+  background: #fff;
+  border: 2px solid #fff;
 }
 
 .panel__button:hover {
-  background: #fde68a;
+  background: var(--bg-color);
 }
 
 .header__layout {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding-top: var(--size-300);
   padding-bottom: var(--size-300);
 }
 
 .header__title {
-  font-size: var(--size-500);
+  font-size: var(--size-600);
+  color: var(--accent-color);
+  font-family: Lobster, cursive;
+  font-weight: bold;
 }
 
 .round {
@@ -88,7 +94,7 @@ button:active {
 
 .panel__card {
   flex: 1 0 auto;
-  background: #fef3c7;
+  background: #fff;
   margin: 1rem;
   padding: var(--size-600) var(--size-500);
   border-radius: var(--radius);
@@ -102,8 +108,26 @@ button:active {
   border-right: none;
   border-left: none;
   border-bottom: 1px solid #000;
-  background: #fef3c7;
-
+  background: var(--bg-color);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   margin: 0 1ch;
   padding: 0 0.5ch;
+}
+
+.panel__card input:focus {
+  color: var(--accent-color);
+  border: var(--accent-color);
+}
+
+.highlighted {
+  font-weight: bold;
+}
+
+.highlighted.correct {
+  color: var(--accent-color);
+}
+
+.highlighted.incorrect {
+  color: red;
 }

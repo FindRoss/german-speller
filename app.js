@@ -1,3 +1,56 @@
+const qs = {
+  holidays: [
+    {
+      english: "When are you going on holiday?",
+      german: "wann gehst du in den Urlaub?"
+    },
+    {
+      english: "Where did you go in italy?",
+      german: "Wo warst du in Italien?"
+    },
+    {
+      english: "I am on holiday for ten days",
+      german: "Ich bin zehn Tage im Urlaub"
+    },
+    {
+      english: "You need to visit Rome",
+      german: "Sie müssen Rom besuchen"
+    },
+  ],
+  work: [
+    {
+      english: "I start work at 10",
+      german: "Ich fange um 10 an zu arbeiten"
+    },
+    {
+      english: "I work as an engineer",
+      german: "Ich arbeite als Ingenieur"
+    },
+    {
+      english: "I enjoy my job",
+      german: "Ich genieße meinen Job"
+    },
+  ],
+  general: [
+    {
+      english: "I pay with card",
+      german: "Ich bezahle mit Karte"
+    },
+    {
+      english: "The bus runs every hour",
+      german: "Der Bus fährt jede Stunde"
+    },
+    {
+      english: "Both of my sisters have brown eyes",
+      german: "Meine beiden Schwestern haben braune Augen"
+    },
+  ]
+}
+
+
+console.log(qs);
+
+
 const state = {
   questions: [
     {
@@ -139,8 +192,6 @@ function removeRoundResult() {
 }
 
 
-
-
 /** 
  * Views
  */
@@ -169,7 +220,7 @@ class SuccessView extends View {
     return `
     <div class="panel__card js-resultCard">
       <h2>success!</h2>
-      <p>${state.answer.attempt} is correct.</p>
+      <p><span class="highlighted correct">${state.answer.attempt}</span> is correct.</p>
     </div>
     `;
   }
@@ -181,7 +232,7 @@ class FailView extends View {
     return `
     <div class="panel__card js-resultCard">
       <h2>Fail!</h2>
-      <p>You entered <strong>${state.answer.attempt}</strong>, but we were looking for <strong>${state.answer.correct}</strong></p>
+      <p>You entered <span class="highlighted incorrect">${state.answer.attempt}</span>, but we were looking for <span class="highlighted correct">${state.answer.correct}</s></p>
     </div>
     `;
   }
