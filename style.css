@@ -1,8 +1,10 @@
 :root {
-  --size-300: 0.707rem;
+  --size-200: 0.65rem;
+  --size-300: 0.75rem;
   --size-400: 1rem;
   --size-500: 1.414rem;
   --size-600: 2rem;
+  --size-700: 3rem;
   --radius: var(--size-300);
   --bg-color: #f0f2f5;
   --accent-color: #1977f2;
@@ -13,6 +15,11 @@ body {
   background: var(--bg-color);
   font-size: 1.125rem;
   font-family: Georgia;
+}
+
+.ff-heading {
+  font-family: Lobster, cursive;
+  font-weight: bold;
 }
 
 .wrapper {
@@ -107,10 +114,9 @@ button:active {
   border-top: none;
   border-right: none;
   border-left: none;
-  border-bottom: 1px solid #000;
+  border-bottom: none;
   background: var(--bg-color);
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-radius: 4px;
   margin: 0 1ch;
   padding: 0 0.5ch;
 }
@@ -130,4 +136,26 @@ button:active {
 
 .highlighted.incorrect {
   color: red;
+}
+
+.cat__row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: var(--size-700);
+  margin-top: var(--size-700);
+  border-top: 3px solid #fff;
+  padding-bottom: var(--size-700);
+}
+
+.cat__button {
+  background: #fff;
+  margin-left: var(--size-200);
+  margin-right: var(--size-200);
+  margin-bottom: var(--size-200);
+}
+
+.cat__button.active {
+  background: var(--accent-color);
+  color: #fff;
 }

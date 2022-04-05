@@ -1,71 +1,5 @@
-const qs = {
-  holidays: [
-    {
-      english: "When are you going on holiday?",
-      german: "wann gehst du in den Urlaub?"
-    },
-    {
-      english: "Where did you go in italy?",
-      german: "Wo warst du in Italien?"
-    },
-    {
-      english: "I am on holiday for ten days",
-      german: "Ich bin zehn Tage im Urlaub"
-    },
-    {
-      english: "You need to visit Rome",
-      german: "Sie müssen Rom besuchen"
-    },
-  ],
-  work: [
-    {
-      english: "I start work at 10",
-      german: "Ich fange um 10 an zu arbeiten"
-    },
-    {
-      english: "I work as an engineer",
-      german: "Ich arbeite als Ingenieur"
-    },
-    {
-      english: "I enjoy my job",
-      german: "Ich genieße meinen Job"
-    },
-  ],
-  general: [
-    {
-      english: "I pay with card",
-      german: "Ich bezahle mit Karte"
-    },
-    {
-      english: "The bus runs every hour",
-      german: "Der Bus fährt jede Stunde"
-    },
-    {
-      english: "Both of my sisters have brown eyes",
-      german: "Meine beiden Schwestern haben braune Augen"
-    },
-  ]
-}
-
-
-console.log(qs);
-
-
 const state = {
-  questions: [
-    {
-      english: "I pay with card",
-      german: "Ich bezahle mit Karte"
-    },
-    {
-      english: "The bus runs every hour",
-      german: "Der Bus fährt jede Stunde"
-    },
-    {
-      english: "Both of my sisters have brown eyes",
-      german: "Meine beiden Schwestern haben braune Augen"
-    },
-  ],
+  questions: qs.general,
   usedQuestions: [],
   questionsLeft: 0,
   questionsUsed: 0,
@@ -79,11 +13,12 @@ const round = document.querySelector('.js-round');
 const panel = document.querySelector('.js-panel');
 const panelOne = document.querySelector('.js-panelOne');
 const panelTwo = document.querySelector('.js-panelTwo');
+const categories = document.querySelector('.cats');
 
 const wordSubmit = document.querySelector('.js-panelSubmit');
 let wordInput = null;
 
-const numberOfQuestions = state.questions.length;
+
 
 /**
  * Add question to DOM and current number
@@ -93,6 +28,7 @@ function generateQuestion(num) {
   panelTwo.textContent = state.questions[num].german;
 
   // display the round / number of questions
+  let numberOfQuestions = state.questions.length + state.usedQuestions.length;
   round.innerHTML = '';
   round.innerHTML = `${(state.questionsUsed + 1)} / ${numberOfQuestions}`;
 
@@ -219,7 +155,7 @@ class SuccessView extends View {
   generateMarkup() {
     return `
     <div class="panel__card js-resultCard">
-      <h2>success!</h2>
+      <h2 class="ff-heading">success!</h2>
       <p><span class="highlighted correct">${state.answer.attempt}</span> is correct.</p>
     </div>
     `;
@@ -231,7 +167,7 @@ class FailView extends View {
   generateMarkup() {
     return `
     <div class="panel__card js-resultCard">
-      <h2>Fail!</h2>
+      <h2 class="ff-heading">Fail!</h2>
       <p>You entered <span class="highlighted incorrect">${state.answer.attempt}</span>, but we were looking for <span class="highlighted correct">${state.answer.correct}</s></p>
     </div>
     `;
@@ -244,26 +180,53 @@ const fail = new FailView();
 /**
  * Finish the game. 
  */
-function roundComplete() {
-  panel.innerHTML = '';
-  panel.innerHTML = `
-    <div class="panel__card">
-     <h2>Game Over....</h2>
-    </div>
-  `;
-  console.log('round COMPLETE!!!!!.')
-}
+// function roundComplete() {
+//   panel.innerHTML = '';
+//   panel.innerHTML = `
+//     <div class="panel__card">
+//      <h2>Game Over....</h2>
+//     </div>
+//   `;
+//   console.log('round COMPLETE!!!!!.')
+// }
 
 /**
  * initNewRound
  */
-
 function initNewRound() {
   /* */
   state.questions = [...state.usedQuestions];
   state.usedQuestions = [];
   state.answer.attempt = '';
   state.questionsUsed = 0;
+  initRound();
+}
+
+function initDiffRound(q) {
+  state.questions = [...qs[q]];
+
+  // this is the same as above.
+  state.usedQuestions = [];
+  state.answer.attempt = '';
+  state.questionsUsed = 0;
+
+
+  // I need to change the active button.
+  // if (q === 'general') btn.classList.add('active');
+  const questionBtns = document.querySelectorAll('.cat__button');
+  const questionArr = Array.from(questionBtns);
+  questionArr.map(a => {
+    if (a.classList.contains('active')) {
+      a.classList.remove('active');
+    }
+
+    if (q === a.textContent.toLowerCase()) {
+      a.classList.add('active');
+    }
+  })
+
+
+
   initRound();
 }
 
@@ -286,4 +249,34 @@ function initRound() {
   }
 }
 initRound();
+
+/**
+ * Question categories
+ */
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Create cat buttons
+function createCatButtons() {
+  const row = document.createElement('div');
+  row.classList.add('cat__row');
+
+  Object.keys(qs).map(q => {
+    let btn = document.createElement('button');
+    btn.classList.add('cat__button');
+
+    /* check if the button is active */
+    if (q === 'general') btn.classList.add('active');
+
+    btn.type = 'button';
+    btn.textContent = capitalizeFirstLetter(q);
+    btn.addEventListener('click', () => initDiffRound(q));
+    row.appendChild(btn);
+  });
+
+  categories.appendChild(row);
+}
+createCatButtons();
 
